@@ -1,0 +1,125 @@
+/* General Styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+header {
+    background-color: #ffffff;
+    padding: 1rem 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-bottom: 1px solid #ddd;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #0056b3;
+}
+
+/* Main Container */
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 2rem;
+    gap: 2rem;
+    flex-grow: 1;
+}
+
+/* Panel Styling */
+.panel {
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.panel h2 {
+    margin-top: 0;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    color: #333;
+}
+
+.left-panel {
+    flex: 1;
+    min-width: 300px;
+}
+
+.right-panel {
+    flex: 3;
+    min-width: 400px;
+}
+
+/* Left Panel: Real-time Data */
+.sensor-data-container {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: space-around;
+    text-align: center;
+}
+
+.sensor-box {
+    padding: 1.5rem;
+    border-radius: 8px;
+    flex: 1;
+    color: #fff;
+}
+
+.sensor-box h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    font-weight: normal;
+}
+
+.sensor-box p {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: bold;
+}
+
+.temp-box {
+    background: linear-gradient(135deg, #ff8c00, #ffaf50);
+}
+
+.humidity-box {
+    background: linear-gradient(135deg, #007bff, #56a7ff);
+}
+
+.last-updated {
+    margin-top: auto;
+    padding-top: 1rem;
+    text-align: center;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+/* Right Panel: Chart */
+.chart-container {
+    position: relative;
+    height: 100%;
+    min-height: 300px;
+    flex-grow: 1;
+}
+
+/* Responsive Layout */
+@media (max-width: 992px) {
+    .container {
+        flex-direction: column;
+    }
+
+    .left-panel,
+    .right-panel {
+        flex: 1 1 100%;
+    }
+}
