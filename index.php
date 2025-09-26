@@ -40,6 +40,10 @@ $pageTitle = "IoT Room Monitoring Dashboard";
                     <h3 class="text-base font-normal mb-2">Kelembaban</h3>
                     <p id="current-humidity" class="text-4xl font-bold">-- %</p>
                 </div>
+                <div class="sensor-box text-white p-4 rounded-lg flex-1 basis-full min-w-[120px] transition-all duration-200 hover:-translate-y-1 hover:shadow-lg bg-[linear-gradient(135deg,#28a745,#5cb85c)]">
+                    <h3 class="text-base font-normal mb-2">Tekanan</h3>
+                    <p id="current-pressure" class="text-4xl font-bold">-- hPa</p>
+                </div>
                 <div class="sensor-box text-white p-4 rounded-lg flex-1 basis-full min-w-[120px] transition-all duration-200 hover:-translate-y-1 hover:shadow-lg bg-[linear-gradient(135deg,#ffc107,#ffd54f)]">
                     <h3 class="text-base font-normal mb-2">Intensitas Cahaya</h3>
                     <p id="current-light" class="text-4xl font-bold">--</p>
@@ -60,7 +64,7 @@ $pageTitle = "IoT Room Monitoring Dashboard";
                 <h2 class="text-xl font-semibold">Riwayat 1 Jam Terakhir</h2>
                 <div class="chart-tabs" id="chart-tabs">
                     <button class="tab-button" data-chart="temp-humidity">Suhu & Kelembaban</button>
-                    <button class="tab-button" data-chart="light">Cahaya</button>
+                    <button class="tab-button" data-chart="light-pressure">Cahaya & Tekanan</button>
                 </div>
             </div>
             <div class="relative flex-grow h-full min-h-[300px]">

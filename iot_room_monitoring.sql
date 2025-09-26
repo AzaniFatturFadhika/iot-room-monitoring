@@ -31,6 +31,7 @@ CREATE TABLE `datasensor` (
   `id` int NOT NULL,
   `temp` float DEFAULT NULL,
   `humidity` float DEFAULT NULL,
+  `pressure` double DEFAULT NULL,
   `light_level` int DEFAULT NULL,
   `light_category` varchar(20) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
