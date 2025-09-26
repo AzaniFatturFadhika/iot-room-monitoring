@@ -21,7 +21,7 @@ $response = [
 
 try {
     // 1. Ambil data terbaru untuk panel real-time
-    $stmt_latest = $conn->query("SELECT temp, humidity, created_at FROM datasensor ORDER BY id DESC LIMIT 1");
+    $stmt_latest = $conn->query("SELECT temp, humidity, light_level, light_category, created_at FROM datasensor ORDER BY id DESC LIMIT 1");
     $latest_data = $stmt_latest->fetch(PDO::FETCH_ASSOC);
     if ($latest_data) {
         $response['latest'] = $latest_data;
@@ -30,9 +30,9 @@ try {
     // 2. Ambil data riwayat 1 jam terakhir untuk grafik
     // Menggunakan NOW() - INTERVAL 1 HOUR untuk mendapatkan data dari 1 jam yang lalu hingga sekarang.
     $stmt_history = $conn->query("
-        SELECT temp, humidity, created_at 
-        FROM datasensor 
-        WHERE created_at >= NOW() - INTERVAL 1 HOUR 
+        SELECT temp, humidity, light_level, light_category, created_at
+        FROM datasensor
+        WHERE created_at >= NOW() - INTERVAL 1 HOUR
         ORDER BY created_at ASC
     ");
     $history_data = $stmt_history->fetchAll(PDO::FETCH_ASSOC);

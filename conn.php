@@ -29,6 +29,3 @@ try {
     // die() akan menghentikan eksekusi skrip
     die("Koneksi ke database gagal: " . $e->getMessage());
 }
-
-// Jika skrip sampai di sini, berarti koneksi berhasil.
-// Variabel  sekarang bisa digunakan di file lain yang meng-include file ini.

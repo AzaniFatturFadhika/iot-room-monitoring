@@ -12,16 +12,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Ambil data dari POST request
     $temp = isset($_POST['temp']) ? $_POST['temp'] : null;
     $humidity = isset($_POST['humidity']) ? $_POST['humidity'] : null;
+    $light_level = isset($_POST['light']) ? $_POST['light'] : null;
+    $light_category = isset($_POST['light_category']) ? $_POST['light_category'] : null;
 
     // Validasi data
-    if ($temp !== null && $humidity !== null) {
+    if ($temp !== null && $humidity !== null && $light_level !== null && $light_category !== null) {
         try {
             // Persiapkan query SQL untuk memasukkan data
-            $stmt = $conn->prepare("INSERT INTO datasensor (temp, humidity) VALUES (:temp, :humidity)");
+            $stmt = $conn->prepare("INSERT INTO datasensor (temp, humidity, light_level, light_category) VALUES (:temp, :humidity, :light_level, :light_category)");
 
             // Bind parameter
             $stmt->bindParam(':temp', $temp);
             $stmt->bindParam(':humidity', $humidity);
+            $stmt->bindParam(':light_level', $light_level);
+            $stmt->bindParam(':light_category', $light_category);
 
             // Eksekusi query
             if ($stmt->execute()) {
@@ -33,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo "Error: " . $e->getMessage();
         }
     } else {
-        echo "Error: Data 'temp' atau 'humidity' tidak ditemukan dalam request POST.";
+        echo "Error: Data tidak lengkap. Pastikan 'temp', 'humidity', 'light', dan 'light_category' dikirim.";
     }
 } else {
     echo "Error: Hanya metode POST yang diizinkan.";

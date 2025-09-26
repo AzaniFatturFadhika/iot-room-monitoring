@@ -31,7 +31,9 @@ CREATE TABLE `datasensor` (
   `id` int NOT NULL,
   `temp` float DEFAULT NULL,
   `humidity` float DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `light_level` int DEFAULT NULL,
+  `light_category` varchar(20) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
