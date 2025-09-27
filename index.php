@@ -32,11 +32,11 @@ $pageTitle = "IoT Room Monitoring Dashboard";
         <div class="panel bg-white rounded-lg shadow-sm p-6 flex flex-col lg:w-[350px] lg:flex-shrink-0">
             <h2 class="text-xl font-semibold border-b-2 border-gray-100 pb-3 mb-6">Pengukuran Saat Ini</h2>
             <div class="flex flex-wrap gap-6 justify-center text-center">
-                <div class="sensor-box text-white p-4 rounded-lg flex-1 basis-[calc(50%-1.5rem)] min-w-[120px] transition-all duration-200 hover:-translate-y-1 hover:shadow-lg bg-[linear-gradient(135deg,#ff8c00,#ffaf50)]">
+                <div class="sensor-box text-white p-4 rounded-lg flex-1 basis-full min-w-[120px] transition-all duration-200 hover:-translate-y-1 hover:shadow-lg bg-[linear-gradient(135deg,#ff8c00,#ffaf50)]">
                     <h3 class="text-base font-normal mb-2">Suhu</h3>
                     <p id="current-temp" class="text-4xl font-bold">-- °C</p>
                 </div>
-                <div class="sensor-box text-white p-4 rounded-lg flex-1 basis-[calc(50%-1.5rem)] min-w-[120px] transition-all duration-200 hover:-translate-y-1 hover:shadow-lg bg-[linear-gradient(135deg,#007bff,#56a7ff)]">
+                <div class="sensor-box text-white p-4 rounded-lg flex-1 basis-full min-w-[120px] transition-all duration-200 hover:-translate-y-1 hover:shadow-lg bg-[linear-gradient(135deg,#007bff,#56a7ff)]">
                     <h3 class="text-base font-normal mb-2">Kelembaban</h3>
                     <p id="current-humidity" class="text-4xl font-bold">-- %</p>
                 </div>

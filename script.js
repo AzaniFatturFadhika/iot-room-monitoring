@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
   // Elemen DOM
   const currentTempEl = document.getElementById("current-temp");
   const currentHumidityEl = document.getElementById("current-humidity");
+  const currentPressureEl = document.getElementById("current-pressure");
   const currentLightEl = document.getElementById("current-light");
   const currentLightCategoryEl = document.getElementById(
     "current-light-category"
@@ -12,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const chartTabs = document.getElementById("chart-tabs");
 
   let historyChart;
-  let activeChart = "temp-humidity"; // 'temp-humidity' or 'light'
+  let activeChart = "temp-humidity"; // 'temp-humidity' or 'light-pressure'
 
   // Konfigurasi untuk grafik Suhu & Kelembaban
   const tempHumidityConfig = {
@@ -92,7 +93,7 @@ document.addEventListener("DOMContentLoaded", function () {
   };
 
   // Konfigurasi untuk grafik Cahaya
-  const lightConfig = {
+  const lightPressureConfig = {
     type: "line",
     data: {
       labels: [], // Sumbu X (waktu)
@@ -108,6 +109,17 @@ document.addEventListener("DOMContentLoaded", function () {
           pointRadius: 0,
           pointHoverRadius: 5,
           stepped: true, // Membuat grafik terlihat seperti tangga, cocok untuk data kategori/level
+        },
+        {
+          label: "Tekanan (hPa)",
+          data: [], // Sumbu Y (data tekanan)
+          borderColor: "rgba(40, 167, 69, 1)",
+          backgroundColor: "rgba(40, 167, 69, 0.2)",
+          yAxisID: "y-pressure",
+          tension: 0.1,
+          fill: true,
+          pointRadius: 0,
+          pointHoverRadius: 5,
         },
       ],
     },
@@ -137,6 +149,17 @@ document.addEventListener("DOMContentLoaded", function () {
             text: "Intensitas Cahaya (lux)",
           },
         },
+        "y-pressure": {
+          type: "linear",
+          position: "right",
+          title: {
+            display: true,
+            text: "Tekanan (hPa)",
+          },
+          grid: {
+            drawOnChartArea: false,
+          },
+        },
       },
       plugins: {
         tooltip: {
@@ -159,6 +182,11 @@ document.addEventListener("DOMContentLoaded", function () {
       }
       const data = await response.json();
 
+      // --- DEBUGGING START ---
+      console.log("Data mentah dari server:", data);
+      console.log("Titik data terbaru:", data.latest);
+      // --- DEBUGGING END ---
+
       // Perbarui panel real-time
       updateRealtimePanel(data.latest);
 
@@ -179,6 +207,10 @@ document.addEventListener("DOMContentLoaded", function () {
       currentHumidityEl.textContent = `${parseFloat(
         latestData.humidity
       ).toFixed(1)} %`;
+      currentPressureEl.textContent = `${parseFloat(
+        latestData.pressure
+      ).toFixed(2)} hPa`;
+
       // Perbarui nilai intensitas cahaya dan kategori di kartu terpisah
       currentLightEl.textContent = `${latestData.light_level}`;
       if (currentLightCategoryEl) {
@@ -194,6 +226,7 @@ document.addEventListener("DOMContentLoaded", function () {
     } else {
       currentTempEl.textContent = "-- °C";
       currentHumidityEl.textContent = "-- %";
+
       currentLightEl.textContent = "--";
       if (currentLightCategoryEl) {
         currentLightCategoryEl.textContent = "--";
@@ -209,12 +242,14 @@ document.addEventListener("DOMContentLoaded", function () {
       const tempData = [];
       const humidityData = [];
       const lightData = [];
+      const pressureData = [];
 
       historyData.forEach((record) => {
         labels.push(new Date(record.created_at.replace(" ", "T")));
         tempData.push(parseFloat(record.temp));
         humidityData.push(parseFloat(record.humidity));
         lightData.push(parseInt(record.light_level, 10));
+        pressureData.push(parseFloat(record.pressure));
       });
 
       historyChart.data.labels = labels;
@@ -222,8 +257,9 @@ document.addEventListener("DOMContentLoaded", function () {
       if (activeChart === "temp-humidity") {
         historyChart.data.datasets[0].data = tempData;
         historyChart.data.datasets[1].data = humidityData;
-      } else if (activeChart === "light") {
+      } else if (activeChart === "light-pressure") {
         historyChart.data.datasets[0].data = lightData;
+        historyChart.data.datasets[1].data = pressureData;
       }
 
       historyChart.update();
@@ -250,7 +286,9 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     const newConfig =
-      activeChart === "temp-humidity" ? tempHumidityConfig : lightConfig;
+      activeChart === "temp-humidity"
+        ? tempHumidityConfig
+        : lightPressureConfig;
     historyChart = new Chart(chartCanvas, newConfig);
 
     // Panggil fetchData lagi untuk langsung mengisi data ke chart yang baru

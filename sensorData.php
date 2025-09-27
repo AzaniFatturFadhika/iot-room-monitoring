@@ -14,16 +14,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $humidity = isset($_POST['humidity']) ? $_POST['humidity'] : null;
     $light_level = isset($_POST['light']) ? $_POST['light'] : null;
     $light_category = isset($_POST['light_category']) ? $_POST['light_category'] : null;
+    $pressure = isset($_POST['pressure']) ? $_POST['pressure'] : null;
 
     // Validasi data
-    if ($temp !== null && $humidity !== null && $light_level !== null && $light_category !== null) {
+    if ($temp !== null && $humidity !== null && $pressure !== null && $light_level !== null && $light_category !== null) {
         try {
             // Persiapkan query SQL untuk memasukkan data
-            $stmt = $conn->prepare("INSERT INTO datasensor (temp, humidity, light_level, light_category) VALUES (:temp, :humidity, :light_level, :light_category)");
+            $stmt = $conn->prepare("INSERT INTO datasensor (temp, humidity, pressure, light_level, light_category) VALUES (:temp, :humidity, :pressure, :light_level, :light_category)");
 
             // Bind parameter
             $stmt->bindParam(':temp', $temp);
             $stmt->bindParam(':humidity', $humidity);
+            $stmt->bindParam(':pressure', $pressure);
             $stmt->bindParam(':light_level', $light_level);
             $stmt->bindParam(':light_category', $light_category);
 

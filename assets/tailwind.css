@@ -265,9 +265,6 @@
   .flex-grow {
     flex-grow: 1;
   }
-  .basis-\[calc\(50\%-1\.5rem\)\] {
-    flex-basis: calc(50% - 1.5rem);
-  }
   .basis-full {
     flex-basis: 100%;
   }
